@@ -16,7 +16,7 @@ export default function useDelete() {
 			})
 		},
 		onSuccess: ()=>{
-			queryClient.refetchQueries({
+			queryClient.invalidateQueries({
 				queryKey: ['useList'],
 			})
 		}

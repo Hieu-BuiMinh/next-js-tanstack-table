@@ -18,7 +18,7 @@ export default function useCreate() {
 			})
 		},
 		onSuccess: ()=>{
-			queryClient.refetchQueries({
+			queryClient.invalidateQueries({
 				queryKey: ['useList'],
 			})
 		}

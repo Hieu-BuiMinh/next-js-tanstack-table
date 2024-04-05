@@ -1,11 +1,12 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { UseQueryOptions, keepPreviousData, useQuery } from '@tanstack/react-query'
 import AdminServices from '../services'
 
 interface IParams {
 	path: string
+	option?: UseQueryOptions
 }
 
-export default function useOne({ path }: IParams) {
+export default function useOne({ path, option }: IParams) {
 	return useQuery({
 		queryKey: ['useOne', path],
 		queryFn: () => {
@@ -17,6 +18,6 @@ export default function useOne({ path }: IParams) {
 			})
 		},
 		placeholderData: keepPreviousData,
-		staleTime: 1000 * 60,
+		enabled: option?.enabled
 	})
 }

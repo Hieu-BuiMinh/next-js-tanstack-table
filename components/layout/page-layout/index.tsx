@@ -5,7 +5,7 @@ interface IPageLayout {
 	meta: { title: string }
 }
 
-function PageLayout({ children, meta }: IPageLayout) {
+function PageLayout({ children, meta }: Readonly<IPageLayout>) {
 	return (
 		<>
 			<div className='h-[80px] border p-2'>{meta.title}</div>

@@ -21,14 +21,16 @@ import ColFilterMore from '../col-filter-more'
 import { fuzzyFilter } from '../col-filter-more/filter-funcs'
 import useList from '../hooks/useList'
 import { useAdminStore } from '../store/useAdminStore'
+import { IMetaContextType } from '@/views/types/context.type'
 
 interface IAdminTableGridView {
 	columns: ColumnDef<any, any>[]
+	context: IMetaContextType | null
 }
 
-function AdminTableGridView({ columns }: Readonly<IAdminTableGridView>) {
-	const { findMenuByPath } = useAdminStore()
-	const menu = findMenuByPath(usePathname())
+function AdminTableGridView({ columns, context }: Readonly<IAdminTableGridView>) {
+	// const { findMenuByPath } = useAdminStore()
+	// const menu = findMenuByPath(usePathname())
 	const pathName = usePathname()
 	const router = useRouter()
 
@@ -44,7 +46,7 @@ function AdminTableGridView({ columns }: Readonly<IAdminTableGridView>) {
 	const columnHelper = createColumnHelper<any>()
 
 	const { data: tableQueryData } = useList({
-		path: menu?.list ?? '',
+		path: context?.meta?.list ?? '',
 		params: { _page: pagination.pageIndex, _per_page: pagination.pageSize },
 	})
 
