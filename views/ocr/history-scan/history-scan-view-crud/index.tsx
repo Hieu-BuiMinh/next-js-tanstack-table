@@ -11,7 +11,7 @@ import { RiArrowGoBackLine } from '@remixicon/react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useOCRHistoryScanContext } from '../components/ocr-context'
+import { useOCRHistoryScanContext } from '../components/ocr-history-scan-context'
 import { OCRFieldData } from './field-data'
 
 interface IHistoryScanViewCRUD {

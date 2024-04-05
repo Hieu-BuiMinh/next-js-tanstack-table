@@ -2,7 +2,7 @@
 
 import AdminTableGridView from '@/components/admin/admin-table'
 import { OCRTableColumnDef } from './components/column-def'
-import { useOCRHistoryScanContext } from '../components/ocr-context'
+import { useOCRHistoryScanContext } from '../components/ocr-history-scan-context'
 
 function HistoryScanView() {
 	const context = useOCRHistoryScanContext()
