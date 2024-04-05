@@ -13,14 +13,14 @@ import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useOCRHistoryScanContext } from '../components/ocr-history-scan-context'
 import { OCRFieldData } from './field-data'
-
+import fieldData from './my-field-data'
 interface IHistoryScanViewCRUD {
 	type: 'create' | 'update' | 'view'
 }
 
 function HistoryScanViewCRUD({ type }: Readonly<IHistoryScanViewCRUD>) {
 	const context = useOCRHistoryScanContext()
-
+	fieldData()
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	
@@ -46,6 +46,14 @@ function HistoryScanViewCRUD({ type }: Readonly<IHistoryScanViewCRUD>) {
 		}
 	}
 
+	// const form = useForm<any>({
+  //   initialValues: null,
+
+  //   validate: {
+  //     email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+  //   },
+  // });
+
 	useEffect(() => {
 		console.log('object')
 		if (createNewOCRSuccess || updateOCRSuccess) {
@@ -68,6 +76,7 @@ function HistoryScanViewCRUD({ type }: Readonly<IHistoryScanViewCRUD>) {
 
 			<FormProvider {...methods}>
 				<form onSubmit={methods.handleSubmit(onSubmit)}>
+				{/* <form onSubmit={()=>{}}> */}
 					<div className="grid grid-cols-12 gap-3">
 						{OCRFieldData(item, type).map((field, i) => {
 							if (field.hidden) return null
