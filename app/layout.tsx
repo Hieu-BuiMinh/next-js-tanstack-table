@@ -16,8 +16,8 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="en">
-			<body className={jetBrainsMono.className}>
+		<html lang="en" suppressHydrationWarning={true}>
+			<body className={jetBrainsMono.className} suppressHydrationWarning={true}>
 				<AppProvider>{children}</AppProvider>
 			</body>
 		</html>

@@ -1,35 +1,59 @@
-import React from 'react'
-import { TextInput } from '@mantine/core'
+import React, { useState } from 'react'
+import { Avatar, FileInput, TextInput } from '@mantine/core'
 import { isNotEmpty } from '@mantine/form'
+import { ConvertToBase64 } from '@/utils'
+import ImgHoverPreview from '@/components/admin/img-hover-preview'
 
-function fieldData() {
-	const initForm = () => [
+const FieldData = ({ type, item }: { type: string; item: any }) => {
+	const [imgFile, setImgFile] = useState<string>()
+	return [
 		{
-			propName: 'bill_id',
+			propName: 'id',
 			control: (form: any) => (
 				<TextInput
 					withAsterisk
-					label="Ngày"
+					label="bill_id"
 					className="col-span-6"
-					placeholder="Nhập ngày"
-					{...form.getInputProps('bill_id')}
+					placeholder="bill_id"
+					{...form.getInputProps('id')}
 				/>
 			),
-			value: '',
+			value: item?.id,
 			validation: isNotEmpty('bill_id không được bỏ trống'),
 		},
 		{
 			propName: 'bill_img',
 			control: (form: any) => (
-				<TextInput
-					withAsterisk
-					label="Ngày"
-					className="col-span-6"
-					placeholder="Nhập ngày"
-					{...form.getInputProps('bill_img')}
-				/>
+				<div className="flex gap-2 items-end">
+					<FileInput
+						withAsterisk
+						label="bill_img"
+						placeholder={item?.bill_img}
+						accept="image/png,image/jpeg,image/jpg"
+						className="col-span-4 flex-1 max-w-[80%]"
+						classNames={{ wrapper: 'truncate text-ellipsis' }}
+						onChange={(file) => {
+							if (file) {
+								setImgFile(URL.createObjectURL(file))
+								ConvertToBase64(file).then((base64) => {
+									form.setValues({
+										bill_img: base64,
+									})
+									setImgFile(base64)
+								})
+							}
+						}}
+						/>
+					<ImgHoverPreview
+						size="md"
+						src={imgFile ?? item?.bill_img}
+						alt=""
+						className="border border-dashed rounded-md"
+						{...form.getInputProps('bill_img')}
+					/>
+				</div>
 			),
-			value: '',
+			value: item?.bill_img,
 			validation: isNotEmpty('bill_img không được bỏ trống'),
 		},
 		{
@@ -37,13 +61,13 @@ function fieldData() {
 			control: (form: any) => (
 				<TextInput
 					withAsterisk
-					label="Ngày"
+					label="brand_id"
 					className="col-span-6"
-					placeholder="Nhập ngày"
+					placeholder="brand_id"
 					{...form.getInputProps('brand_id')}
 				/>
 			),
-			value: '',
+			value: item?.brand_id,
 			validation: isNotEmpty('brand_id không được bỏ trống'),
 		},
 		{
@@ -51,13 +75,13 @@ function fieldData() {
 			control: (form: any) => (
 				<TextInput
 					withAsterisk
-					label="Ngày"
+					label="brand_name"
 					className="col-span-6"
-					placeholder="Nhập ngày"
+					placeholder="brand_name"
 					{...form.getInputProps('brand_name')}
 				/>
 			),
-			value: '',
+			value: item?.brand_name,
 			validation: isNotEmpty('brand_name không được bỏ trống'),
 		},
 		{
@@ -65,13 +89,13 @@ function fieldData() {
 			control: (form: any) => (
 				<TextInput
 					withAsterisk
-					label="Ngày"
+					label="phone_number"
 					className="col-span-6"
-					placeholder="Nhập ngày"
+					placeholder="phone_number"
 					{...form.getInputProps('phone_number')}
 				/>
 			),
-			value: '',
+			value: item?.phone_number,
 			validation: isNotEmpty('phone_number không được bỏ trống'),
 		},
 		{
@@ -79,13 +103,13 @@ function fieldData() {
 			control: (form: any) => (
 				<TextInput
 					withAsterisk
-					label="Ngày"
+					label="bill_value"
 					className="col-span-6"
-					placeholder="Nhập ngày"
+					placeholder="bill_value"
 					{...form.getInputProps('bill_value')}
 				/>
 			),
-			value: '',
+			value: item?.bill_value,
 			validation: isNotEmpty('bill_value không được bỏ trống'),
 		},
 		{
@@ -93,16 +117,16 @@ function fieldData() {
 			control: (form: any) => (
 				<TextInput
 					withAsterisk
-					label="Ngày"
+					label="date"
 					className="col-span-6"
-					placeholder="Nhập ngày"
+					placeholder="date"
 					{...form.getInputProps('date')}
 				/>
 			),
-			value: '',
+			value: item?.date,
 			validation: isNotEmpty('date không được bỏ trống'),
 		},
 	]
 }
 
-export default fieldData
+export default FieldData

@@ -16,7 +16,7 @@ import {
 import clsx from 'clsx'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
-import AdminTableActionMenu from '../action-menu'
+import AdminTableActionMenu from '../col-action-menu'
 import ColFilterMore from '../col-filter-more'
 import { fuzzyFilter } from '../col-filter-more/filter-funcs'
 import useList from '../hooks/useList'
